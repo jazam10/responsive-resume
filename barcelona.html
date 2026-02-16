@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Barcelona Tour Project</title>
+    </head>
+
+    <body>
+        <h1>Project: Barcelona Tour Management System</h1>
+
+        <h3>Description:</h3>
+        <p>
+            The Barcelona Tour Management System is a Java-based console application
+            that allows users to book tours, cancel bookings, apply seasonal discounts,
+            modify tour durations, and view all booked tours. The program uses object-
+            oriented programming principles and a menu-driven interface.
+        </p>
+
+
+        
+        <h3>Java Source Code:</h3>
+
+        <pre>
+    import java.util.*;
+
+    public class BarcelonaTour {
+
+        private static int totalTours;
+        private int tourNumber;
+        private double tourPrice;
+        private int tourDuration;
+
+        public BarcelonaTour(double tourPrice, int tourDuration) {
+            totalTours++;
+            this.tourNumber = totalTours;
+            this.tourPrice = tourPrice;
+            this.tourDuration = tourDuration;
+        }
+
+        private void calculateDiscount() {
+            tourPrice = tourPrice * 0.9;
+        }
+
+        private void displayDetails() {
+            System.out.printf("Tour #%d\n", tourNumber);
+            System.out.printf("Price: €%.2f\n", tourPrice);
+            System.out.printf("Duration: %d hours\n\n", tourDuration);
+        }
+
+        private void changeDuration(int newHours) {
+            this.tourDuration = newHours;
+        }
+
+        private int getTourID() {
+            return tourNumber;
+        }
+
+        public static void main(String[] args) {
+            Scanner input = new Scanner(System.in);
+            LinkedList<BarcelonaTour> tours = new LinkedList<>();
+            System.out.println("Barcelona Tour Management System");
+        }
+    }
+        </pre>
+
+        
+        <h3>Output Result:</h3>
+        <img src="barcelonaTour.png" alt="Barcelona Tour Project">
+        
+
+        <h3>Skills Learned:</h3>
+        <ul>
+            <li>Java object-oriented programming</li>
+            <li>Use of classes, constructors, and methods</li>
+            <li>LinkedList data structures</li>
+            <li>Handling user input with Scanner</li>
+            <li>Looping and conditional logic</li>
+        </ul>
+
+    </body>
+</html>

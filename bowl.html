@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Chiptole Bowl Project</title>
+    </head>
+
+    <body>
+        <h1>Project: Chipotle Bowl Ordering System</h1>
+
+    <h3>Description:</h3>
+        <p>
+            This project is a Java console application that allows users to build a customizable
+            chipotle bowl by adding ingredients dynamically. The program uses LinkedLists to store and
+            manage ingredients, calculates the total cost based on ingredient names, and
+            demonstrates object-oriented programming and user input handling.
+        </p>
+
+
+        <h3>Java Source Code:</h3>
+
+
+
+    <pre>
+    //import linked lists and scanner  
+    import java.util.*;
+
+    public class Bowl {
+        
+        //A LinkedList of Strings to store the ingredients 
+        private LinkedList<String> ingredients;
+        
+        
+        //constructor takes in a String
+        public Bowl(String ingredient1) {
+            ingredients = new LinkedList<>();
+            ingredients.add(ingredient1);
+        }
+        
+        
+        //constructor has no input
+        public Bowl() {
+            ingredients = new LinkedList<String>();
+        }
+        
+        
+        //add a String to the LinkedList
+        public void addOne(String ingredient) {
+            ingredients.add(ingredient);
+        }
+        
+        
+        //mix ingredients from other list alternating 
+        public void AddManyMixed(LinkedList<String> newIngredients) {
+            //mixed list 
+            LinkedList<String> mixed = new LinkedList<String>();
+            int i = 0, j = 0;
+            
+            //while ingredients exist in both lists 
+            while (i < ingredients.size() || j < newIngredients.size()){
+                
+                //add item from first ingredient list to mixed list 
+                //while i is less than list size add to the mixed list   
+                if(i < ingredients.size()) {
+                    mixed.add(ingredients.get(i));
+                    i++; //move to next item 
+                }
+                
+                //then add items from the next newIngredient list
+                //alternates printing until a list is empty
+                if(j < newIngredients.size()) {
+                    mixed.add(newIngredients.get(j));
+                    j++; //move to next item 
+                }
+            }
+            
+            //original list is now the newly mixed list 
+            ingredients = mixed;
+        }
+        
+        
+        //calculate the cost and return a double
+        public double calcCost() {
+            int totalLetters = 0; //letters in ingredients 
+            
+            //run through list and count letters in each ingredient 
+            for (int i = 0; i < ingredients.size(); i++) {
+                String item = ingredients.get(i);
+                totalLetters += item.length();
+            }
+            
+            //10 dollars + 10 cents per each letter in ingredients
+            double total = 10.0 + 0.10 * totalLetters;
+            return total;
+        }
+        
+        //print ingredients 
+        public void printIngredients() {
+            System.out.println("Your Chipotle Bowl Contains: ");
+            for(int i = 0; i < ingredients.size(); i++) {
+                System.out.println((i + 1) + ". " + ingredients.get(i));
+            }
+        }
+        
+        
+        
+        //print main statement 
+        public static void main(String[] args) {
+            Scanner input = new Scanner(System.in);
+            Bowl bowl;
+        
+            //Start with ingredient 
+            System.out.print("Start with an ingredient? (yes/no): ");
+            String answer = input.nextLine().toLowerCase();
+        
+            //first ingredients if yes else begin bowl
+            if (answer.equals("yes")) {
+                System.out.print("Enter your first ingredient: ");
+                String first = input.nextLine().trim();
+                bowl = new Bowl(first);
+            } else {
+                bowl = new Bowl();
+            }
+        
+            //next ingredient 
+            System.out.print("Enter another ingredient: ");
+            String another = input.nextLine().trim();
+            bowl.addOne(another);
+        
+            //more ingredients until done is encountered 
+            System.out.println("Enter ingredients (type 'done' to finish): ");
+            String next = input.nextLine();
+        
+            while (!next.equalsIgnoreCase("done")) {
+                bowl.addOne(next.trim());
+                next = input.nextLine();
+            }
+        
+            //print ingredients and cost of order 
+            bowl.printIngredients();
+            System.out.printf("Total Cost: $%.2f\n", bowl.calcCost());
+        
+            // new ingredients until done is encountered 
+            LinkedList<String> moreIngredients = new LinkedList<String>();
+            System.out.println("Enter ingredients (type 'done' to finish): ");
+            next = input.nextLine();
+        
+            while (!next.equalsIgnoreCase("done")) {
+                moreIngredients.add(next.trim());
+                next = input.nextLine();
+            }
+        
+            //add the new ingredients and mix then print new bowl and price 
+            bowl.AddManyMixed(moreIngredients);
+            bowl.printIngredients();
+            System.out.printf("Total Cost: $%.2f\n", bowl.calcCost());
+        
+            input.close();
+        }
+    }
+    </pre>
+
+    <h3>Output Result:</h3>
+    <img src="bowl.png" alt="Chipotle Bowl Ordering System">
+
+
+    <h3>Skills Learned:</h3>
+
+    <ul>
+        <li>Java object-oriented programming</li>
+        <li>LinkedList data structures</li>
+        <li>User input handling with Scanner</li>
+        <li>Looping and conditional logic</li>
+        <li>Algorithm design and list manipulation</li>
+        <li>String processing and calculations</li>
+    </ul>
+    </body>
+</html>
